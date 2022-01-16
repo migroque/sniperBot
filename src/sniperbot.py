@@ -135,7 +135,17 @@ async def getTop(m):
         user = client.get_user(userID)
         if user is None:
             user = await client.fetch_user(userID)
-        snipeeTable += str(rank + 1) + "    " + user.name + "#" + user.discriminator + "    " + str(snipeCount) + "\n"
+            
+        # Some alignment stuff for the string, specifically rank and user 
+        ran_name_spaces="    "
+        spaces_add=3
+        for i in range((rank+1)%10):
+            spaces_add-=1
+        for i in spaces_add:
+            ran_name_spaces+=" "
+            
+        
+        snipeeTable += str(rank + 1) + ran_name_spaces + user.name + "#" + user.discriminator + "    " + str(snipeCount) + "\n"
     snipeeTable += "```"
     await m.channel.send(sniperTable)
     await m.channel.send(snipeeTable)
